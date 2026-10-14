@@ -12,8 +12,11 @@ async function retrieve(question,f){
  const candidates=[],df=Object.fromEntries(terms.map(t=>[t,0]));
  for(const i of filter(f)){const text=texts[i];const hit=terms.filter(t=>text.includes(t));if(hit.length){hit.forEach(t=>df[t]++);candidates.push({i,hit,length:text.length});}}
  candidates.forEach(c=>c.score=c.hit.reduce((n,t)=>n+Math.log(1+catalog.length/(1+df[t])),0)/(1+c.length/1500));candidates.sort((a,b)=>b.score-a.score||a.i-b.i);
- const selected=[],seen=new Set();for(const c of candidates){if(seen.has(texts[c.i]))continue;seen.add(texts[c.i]);selected.push(c.i);if(selected.length===6)break;}
- return {records:await Promise.all(selected.map(detail)),matched_records:candidates.length,query_terms:terms};
+ const negativeAspect=f.aspect!=='all'&&f.sentiment===String(metadata.sentiments.indexOf('negative'));
+ const selected=[],seen=new Set();for(const c of candidates){if(seen.has(texts[c.i]))continue;seen.add(texts[c.i]);selected.push(c.i);if(selected.length===(negativeAspect?18:6))break;}
+ let records=await Promise.all(selected.map(detail));
+ if(negativeAspect){const aspect=metadata.aspects[Number(f.aspect)];records=records.filter(row=>['negative','mixed'].includes(row.aspects[aspect]));}
+ return {records:records.slice(0,6),matched_records:candidates.length,query_terms:terms};
 }
 self.onmessage=async({data})=>{const {id,type,payload}=data;try{
  if(type==='init'){metadata=await json('metadata.json');catalog=await json('catalog.json.gz');if(catalog.length!==metadata.rows)throw Error('CATALOG_COUNT_MISMATCH');self.postMessage({id,result:metadata});return;}
