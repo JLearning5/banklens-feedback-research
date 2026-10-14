@@ -178,6 +178,8 @@ async def main():
                     accepted = aggregate_valid(answer, task['filters'])
                 elif expected == 'evidence':
                     accepted = bool(answer.get('summary')) and any(any(term in record['text'].lower() for term in task['terms']) for record in answer.get('evidence', []))
+                    if 'expected_sentiment' in task:
+                        accepted = accepted and all(record['sentiment'] == task['expected_sentiment'] for record in answer.get('evidence', []))
                 elif expected == 'labels':
                     accepted = answer['sentiment'] == task['sentiment'] and set(answer['aspects']) == set(task['aspects']) and ('priority' not in task or answer['priority'] == task['priority'])
                 else:

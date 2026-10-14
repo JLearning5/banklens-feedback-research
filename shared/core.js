@@ -3,6 +3,14 @@ export const aspectNames={transfers_payments:'Transfers & payments',login_authen
 export const title=s=>String(s??'').replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
 export const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const defaultFilters=()=>({bank:'all',year:'all',sentiment:'all',aspect:'all',priority:'all',queue:false,query:''});
+export function routePolicy(question){
+ const q=String(question).trim().toLowerCase();
+ if(/^(?:please\s+)?(?:send|transfer|withdraw|deposit|pay)\b/.test(q)&&/\b(?:money|funds?|cash|payments?|account)\b/.test(q)&&! /\b(?:reviews?|feedback|examples?|customers?)\b/.test(q))return 'refer';
+ if(/^(?:please\s+)?(?:change|reset|block|unblock|open|close)\b/.test(q)&&/\b(?:my|our)\b/.test(q)&&/\b(?:password|pin|account|card)\b/.test(q))return 'refer';
+ if(/\bhow many\b|\b(?:count|total|number|percentage|percent|compare|comparison)\b/.test(q))return 'aggregate';
+ if(/\b(?:show|find|examples?|retrieve)\b|\bwhat (?:do|are|have) (?:the )?customers\b|\b(?:feedback|reviews?)\s+(?:about|on|containing)\b/.test(q))return 'retrieve';
+ return null;
+}
 export function matches(row,f){
   return (f.bank==='all'||row[0]===Number(f.bank))&&(f.year==='all'||row[1]===Number(f.year))&&(f.sentiment==='all'||row[3]===Number(f.sentiment))&&(f.aspect==='all'||Boolean(row[4]&(1<<Number(f.aspect))))&&(f.priority==='all'||row[5]===Number(f.priority))&&(!f.queue||row[6]===1);
 }

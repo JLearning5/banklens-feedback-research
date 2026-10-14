@@ -13,7 +13,7 @@
   "aspectPatterns": {
     "payments": "transfer|pay|deposit|withdraw|revers|refund|balance|transaction|debit|credit",
     "login": "log.?in|sign.?in|password|\\bpin\\b|\\botp\\b|authentic|fingerprint|biometric",
-    "app": "app|crash|slow|speed|updat|bug|error|interface|design|version|network|load|freez",
+    "app": "\\bapp(?:lication)?s?\\b|crash|slow|speed|updat|bug|error|interface|design|version|network|load|freez",
     "fees": "fee|charg|cost|deduct|levy|price|expensive",
     "account": "kyc|verif|identity|restrict|register|registration|open|block",
     "cards": "\\bcard\\b|\\batm\\b|pos|cash machine",
