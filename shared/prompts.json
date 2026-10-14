@@ -14,10 +14,19 @@
     "payments": "transfer|pay|deposit|withdraw|revers|refund|balance|transaction|debit|credit",
     "login": "log.?in|sign.?in|password|\\bpin\\b|\\botp\\b|authentic|fingerprint|biometric",
     "app": "\\bapp(?:lication)?s?\\b|crash|slow|speed|updat|bug|error|interface|design|version|network|load|freez",
-    "fees": "fee|charg|cost|deduct|levy|price|expensive",
+    "fees": "\\bfees?\\b|\\bcharg\\w*\\b|\\bcosts?\\b|\\bdeduct\\w*\\b|\\blev(?:y|ies)\\b|\\bprices?\\b|\\bexpensive\\b",
     "account": "kyc|verif|identity|restrict|register|registration|open|block",
-    "cards": "\\bcard\\b|\\batm\\b|pos|cash machine",
+    "cards": "\\bcards?\\b|\\batm\\b|\\bpos\\b|cash machine",
     "support": "support|staff|service|help|respond|response|reply|complaint|contact|agent",
     "other": "."
+  },
+  "aspectQueryPatterns": {
+    "payments": "\\b(?:transfers?|payments?|deposits?|withdrawals?|reversals?|refunds?|balances?|transactions?)\\b",
+    "login": "\\b(?:login|log in|sign in|passwords?|pin|otp|authentication|fingerprint|biometric)\\b",
+    "app": "\\b(?:apps?|applications?|crashes?|crashing|bugs?|usability|interface|speed|reliability|updates?)\\b",
+    "fees": "\\b(?:fees?|charges?|costs?|levy|levies)\\b",
+    "account": "\\b(?:kyc|verification|registration|restrictions?|account access|account opening)\\b",
+    "cards": "\\b(?:cards?|atm|pos)\\b",
+    "support": "\\b(?:support|customer service|staff|contact centre|call centre)\\b"
   }
 }

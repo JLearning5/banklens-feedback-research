@@ -1,7 +1,7 @@
 import {parseObject,validateAnswer,redact,effectiveScope,routePolicy} from './core.js';
 export async function runAgent(question,filters,{generate,choose,tools,metadata,prompts,onEvent=()=>{},signal}){
  const started=performance.now(),trace=[],scope=effectiveScope(question,filters,metadata),policy=routePolicy(question);let aggregate=null,evidence=[];
- const mentioned=Object.entries(prompts.aspectPatterns||{}).filter(([key,pattern])=>key!=='other'&&new RegExp(pattern,'i').test(question)).map(([key])=>aliases[key]);
+ const mentioned=Object.entries(prompts.aspectQueryPatterns||{}).filter(([key,pattern])=>key!=='other'&&new RegExp(pattern,'i').test(question)).map(([key])=>aliases[key]);
  if(scope.aspect==='all'&&mentioned.length===1&&metadata.aspects.includes(mentioned[0]))scope.aspect=String(metadata.aspects.indexOf(mentioned[0]));
  if(policy==='retrieve'&&scope.sentiment==='all'&&/\b(?:fail(?:ed|ure|ing)?|problems?|complaints?|broken|crash(?:es|ing)?)\b/i.test(question))scope.sentiment=String(metadata.sentiments.indexOf('negative'));
  const event=(tool,detail)=>{const item={tool,detail,elapsed_ms:Math.round(performance.now()-started)};trace.push(item);onEvent(item);};
