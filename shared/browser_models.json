@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Compact",
+    "id": "onnx-community/Qwen3-0.6B-ONNX",
+    "revision": "58ca03a5e7b354b480b1a82b34bde8dc7b854cc0",
+    "cpu_dtype": "q8",
+    "gpu_dtype": "q4f16",
+    "cpu_bytes": 617687575,
+    "gpu_bytes": 569789750,
+    "sentiment": {
+      "id": "Xenova/twitter-roberta-base-sentiment-latest",
+      "revision": "f3ec4d0925f90c3ca7ee7814f52d6ee7cf180445",
+      "bytes": 125905426
+    }
+  }
+]

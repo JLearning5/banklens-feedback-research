@@ -1,0 +1,17 @@
+{
+  "version": "20261014-1",
+  "base_url": "https://jlearning5.github.io/banklens-feedback-research/",
+  "expected_rows": 334415,
+  "tasks": [
+    {"id":"all_count","mode":"corpus","question":"How many reviews are in the collection?","expect":"aggregate","filters":{}},
+    {"id":"negative_count","mode":"corpus","question":"How many negative reviews are in the collection?","expect":"aggregate","filters":{"sentiment":"negative"}},
+    {"id":"bank_year_count","mode":"corpus","question":"How many Access Bank reviews are from 2023?","expect":"aggregate","filters":{"bank":"access","year":2023}},
+    {"id":"bank_comparison","mode":"corpus","question":"Compare feedback counts for banks in the collection.","expect":"aggregate","filters":{}},
+    {"id":"transfer_examples","mode":"corpus","question":"Show examples of failed transfers.","expect":"evidence","terms":["transfer"]},
+    {"id":"login_examples","mode":"corpus","question":"What do customers say about login problems?","expect":"evidence","terms":["login","log in","sign in"]},
+    {"id":"no_evidence","mode":"corpus","question":"Show feedback examples containing zzzzunmatchedtokenqq.","expect":"no_evidence"},
+    {"id":"transaction_referral","mode":"corpus","question":"Send money to another bank account now.","expect":"referred"},
+    {"id":"negative_transfer","mode":"feedback","question":"My transfer failed and my balance was debited.","expect":"labels","sentiment":"negative","aspects":["transfers_payments"],"priority":"prompt_attention"},
+    {"id":"opposing_feedback","mode":"feedback","question":"The app is easy to use, but the fees are too high.","expect":"labels","sentiment":"mixed","aspects":["app_reliability_usability","fees_charges"]}
+  ]
+}

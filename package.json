@@ -1,0 +1,1 @@
+{"name":"banklens-feedback-research","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","preview":"node scripts/preview.mjs"},"engines":{"node":">=20"}}

@@ -1,0 +1,512 @@
+{
+  "repo": "Federal-University-Lokoja/Bank-Review",
+  "revision": "27d2b6e7d541a0b713dc8eed56b0daf27476d2a7",
+  "license": "apache-2.0",
+  "total_rows": 334415,
+  "files": [
+    {
+      "file": "access_reviews.csv",
+      "bytes": 2934902,
+      "sha256": "676cd26b49b2a126da2a80d9b2406077d5242936a03af42975636c9e08678c7c",
+      "rows": 50204,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 198,
+        "2023": 18424,
+        "2022": 21523,
+        "2021": 8479,
+        "2020": 1580
+      },
+      "score_counts": {
+        "1": 9191,
+        "5": 29370,
+        "4": 6406,
+        "3": 3318,
+        "2": 1919
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 30125,
+      "short_under_3_words": 19410
+    },
+    {
+      "file": "ecoBank_reviews.csv",
+      "bytes": 1839060,
+      "sha256": "1a783b8ae8dfdf5e1850a53e6303386d8bd345a6613e11f5978657af2905193e",
+      "rows": 17442,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 18,
+        "2023": 1630,
+        "2022": 2099,
+        "2021": 3074,
+        "2020": 4812,
+        "2019": 1868,
+        "2018": 1742,
+        "2017": 1592,
+        "2016": 607
+      },
+      "score_counts": {
+        "5": 6534,
+        "1": 7038,
+        "3": 1271,
+        "4": 1431,
+        "2": 1168
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 14127,
+      "short_under_3_words": 4004
+    },
+    {
+      "file": "fbn_reviews.csv",
+      "bytes": 2544488,
+      "sha256": "58954561b0812518c91246bf94ecd1732931cb21452f2558ee92a90f1f27c1aa",
+      "rows": 33607,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 33,
+        "2023": 5605,
+        "2022": 5951,
+        "2021": 6589,
+        "2020": 5175,
+        "2019": 3434,
+        "2018": 1844,
+        "2017": 2432,
+        "2016": 2198,
+        "2015": 346
+      },
+      "score_counts": {
+        "1": 10313,
+        "5": 15939,
+        "4": 3267,
+        "2": 1927,
+        "3": 2161
+      },
+      "empty_content": 29,
+      "unique_normalized_content": 23748,
+      "short_under_3_words": 10813
+    },
+    {
+      "file": "fcmb_reviews.csv",
+      "bytes": 1108473,
+      "sha256": "c257ae664fe8224cd5d3e1bec595a61b76b8b445874bc457d6e4006c2c45a795",
+      "rows": 12006,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 19,
+        "2023": 3514,
+        "2022": 2765,
+        "2021": 2198,
+        "2020": 2017,
+        "2019": 1484,
+        "2018": 9
+      },
+      "score_counts": {
+        "2": 684,
+        "5": 5135,
+        "1": 4530,
+        "4": 958,
+        "3": 699
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 9521,
+      "short_under_3_words": 3097
+    },
+    {
+      "file": "fidelityBank_reviews.csv",
+      "bytes": 294880,
+      "sha256": "26d070d9b36d726b2bf69034ee284b68dcdb60733fc9020619c94cbacf6d05ad",
+      "rows": 3703,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 1,
+        "2023": 267,
+        "2022": 427,
+        "2021": 306,
+        "2020": 641,
+        "2019": 1239,
+        "2018": 542,
+        "2017": 259,
+        "2016": 11,
+        "2015": 10
+      },
+      "score_counts": {
+        "1": 817,
+        "2": 244,
+        "5": 1905,
+        "3": 293,
+        "4": 444
+      },
+      "empty_content": 1,
+      "unique_normalized_content": 2868,
+      "short_under_3_words": 1071
+    },
+    {
+      "file": "gtb_reviews.csv",
+      "bytes": 1149337,
+      "sha256": "f1cb9998b883d8cda95d82682483e7d99f556abe67d02f409092b818c8b7f0ad",
+      "rows": 14147,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 3,
+        "2023": 1018,
+        "2022": 1297,
+        "2021": 1656,
+        "2020": 2080,
+        "2019": 1923,
+        "2018": 1019,
+        "2017": 1344,
+        "2016": 1694,
+        "2015": 1014,
+        "2014": 869,
+        "2013": 209,
+        "2012": 21
+      },
+      "score_counts": {
+        "2": 974,
+        "4": 1756,
+        "1": 3726,
+        "3": 1163,
+        "5": 6528
+      },
+      "empty_content": 34,
+      "unique_normalized_content": 10601,
+      "short_under_3_words": 4336
+    },
+    {
+      "file": "jaizBank_reviews.csv",
+      "bytes": 95538,
+      "sha256": "c0ccb58b80b8183a9f3d20241d436bd3bb264a206f515508d2851a0abafe3b5c",
+      "rows": 1197,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 4,
+        "2023": 324,
+        "2022": 248,
+        "2021": 342,
+        "2020": 212,
+        "2019": 67
+      },
+      "score_counts": {
+        "5": 664,
+        "2": 82,
+        "4": 124,
+        "1": 231,
+        "3": 96
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 990,
+      "short_under_3_words": 364
+    },
+    {
+      "file": "keyStoneBank_reviews.csv",
+      "bytes": 367628,
+      "sha256": "756fd817d7f49ec79881634da8ebb1a0e5efad4ef570d7ee243b598e2d6c6696",
+      "rows": 3978,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 6,
+        "2023": 944,
+        "2022": 588,
+        "2021": 894,
+        "2020": 798,
+        "2019": 375,
+        "2018": 373
+      },
+      "score_counts": {
+        "1": 1222,
+        "5": 1979,
+        "3": 253,
+        "4": 303,
+        "2": 221
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 3327,
+      "short_under_3_words": 989
+    },
+    {
+      "file": "polarisBank_reviews.csv",
+      "bytes": 688103,
+      "sha256": "57c01d2c01d765ab88fe02c74f63533e9299f4b3409e57962eddde56dafa5b41",
+      "rows": 6100,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 13,
+        "2023": 1967,
+        "2022": 1899,
+        "2021": 2145,
+        "2020": 76
+      },
+      "score_counts": {
+        "4": 400,
+        "1": 2797,
+        "5": 2223,
+        "2": 380,
+        "3": 300
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 5278,
+      "short_under_3_words": 1163
+    },
+    {
+      "file": "stanbicIbtc_reviews.csv",
+      "bytes": 3312819,
+      "sha256": "f63120a64a14f2426f6dc40bad15b338864ea9dd5b2a8b7840f34814631947fe",
+      "rows": 45094,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 26,
+        "2023": 2926,
+        "2022": 5618,
+        "2021": 13074,
+        "2020": 11704,
+        "2019": 5422,
+        "2018": 1510,
+        "2017": 1516,
+        "2016": 1655,
+        "2015": 905,
+        "2014": 738
+      },
+      "score_counts": {
+        "5": 23413,
+        "2": 2377,
+        "1": 11797,
+        "4": 4829,
+        "3": 2678
+      },
+      "empty_content": 5,
+      "unique_normalized_content": 31828,
+      "short_under_3_words": 14054
+    },
+    {
+      "file": "sterlingBank_reviews.csv",
+      "bytes": 753954,
+      "sha256": "428e92d1466faf8876bad8a73a41d165f127308f3538f4da160bf6ab4fc9442d",
+      "rows": 7974,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 36,
+        "2023": 2355,
+        "2022": 2106,
+        "2021": 2187,
+        "2020": 1290
+      },
+      "score_counts": {
+        "5": 4086,
+        "1": 2481,
+        "2": 456,
+        "3": 432,
+        "4": 519
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 6438,
+      "short_under_3_words": 1980
+    },
+    {
+      "file": "uba_reviews.csv",
+      "bytes": 4947630,
+      "sha256": "c5328b528542e8a90a5a212642b315c4c832f22f505e6ea82a2d4a44e40f9161",
+      "rows": 87609,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 325,
+        "2023": 28403,
+        "2022": 11166,
+        "2021": 18300,
+        "2020": 13561,
+        "2019": 7801,
+        "2018": 4827,
+        "2017": 2398,
+        "2016": 556,
+        "2015": 272
+      },
+      "score_counts": {
+        "5": 49864,
+        "1": 15767,
+        "4": 12275,
+        "3": 6133,
+        "2": 3570
+      },
+      "empty_content": 10,
+      "unique_normalized_content": 53188,
+      "short_under_3_words": 33014
+    },
+    {
+      "file": "unionBank_reviews.csv",
+      "bytes": 737080,
+      "sha256": "bd5fdb131666f2dfac916fa0d498c4cc1490bf032aa53848bfa9525761096bc7",
+      "rows": 9293,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 9,
+        "2023": 2023,
+        "2022": 1199,
+        "2021": 1314,
+        "2020": 1279,
+        "2019": 2624,
+        "2018": 543,
+        "2017": 302
+      },
+      "score_counts": {
+        "1": 2967,
+        "5": 4400,
+        "4": 830,
+        "2": 477,
+        "3": 619
+      },
+      "empty_content": 3,
+      "unique_normalized_content": 6811,
+      "short_under_3_words": 3078
+    },
+    {
+      "file": "unityBank_reviews.csv",
+      "bytes": 57842,
+      "sha256": "6c97c45fce38eb8d3279f04141ae0b74ca14ce5cf7f9669a6d4ee958349ce3c9",
+      "rows": 927,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2022": 96,
+        "2021": 135,
+        "2020": 120,
+        "2019": 120,
+        "2018": 101,
+        "2017": 148,
+        "2016": 111,
+        "2015": 60,
+        "2014": 34,
+        "2013": 2
+      },
+      "score_counts": {
+        "5": 428,
+        "1": 308,
+        "3": 66,
+        "2": 38,
+        "4": 87
+      },
+      "empty_content": 3,
+      "unique_normalized_content": 792,
+      "short_under_3_words": 300
+    },
+    {
+      "file": "wemaBank_reviews.csv",
+      "bytes": 1957095,
+      "sha256": "b45c4803d0a3ba18a234d6095a3f5b96108872f235fdc028b13384e10a09b836",
+      "rows": 20175,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 26,
+        "2023": 3952,
+        "2022": 6296,
+        "2021": 3774,
+        "2020": 3372,
+        "2019": 1161,
+        "2018": 980,
+        "2017": 614
+      },
+      "score_counts": {
+        "5": 9409,
+        "1": 6345,
+        "4": 1849,
+        "3": 1381,
+        "2": 1191
+      },
+      "empty_content": 0,
+      "unique_normalized_content": 15610,
+      "short_under_3_words": 5194
+    },
+    {
+      "file": "zenithBank_reviews.csv",
+      "bytes": 1776153,
+      "sha256": "dda1b15cddf5d449614cbb263fea43cf323e0cae3d367f73cae6db4942611d51",
+      "rows": 20959,
+      "columns": [
+        "year",
+        "content",
+        "score"
+      ],
+      "year_counts": {
+        "2024": 28,
+        "2023": 2388,
+        "2022": 3983,
+        "2021": 4393,
+        "2020": 3723,
+        "2019": 3663,
+        "2018": 582,
+        "2017": 589,
+        "2016": 875,
+        "2015": 579,
+        "2014": 123,
+        "2013": 33
+      },
+      "score_counts": {
+        "1": 6514,
+        "5": 9845,
+        "2": 1291,
+        "4": 1950,
+        "3": 1359
+      },
+      "empty_content": 11,
+      "unique_normalized_content": 15378,
+      "short_under_3_words": 6533
+    }
+  ]
+}
