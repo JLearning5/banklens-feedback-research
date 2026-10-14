@@ -154,10 +154,12 @@ async def main():
             await page.locator('#clear-filters').click()
             await page.locator('[data-route="analysis"]').click()
             assert await page.locator('#analysis-form button[type="submit"]').is_disabled(), 'MODEL_NOT_PREPARED'
+            assert await page.locator('[data-action="cancel-analysis"]').is_hidden(), 'IDLE_CANCEL_VISIBLE'
             at = time.monotonic()
             await page.locator('#prepare-model').click()
             await page.wait_for_function("document.querySelector('#model-status')?.textContent==='Analysis is ready.'", timeout=1800000)
             report['model_preparation_seconds'] = time.monotonic() - at
+            assert await page.locator('[data-action="cancel-analysis"]').is_hidden(), 'READY_CANCEL_VISIBLE'
             for task in config['tasks']:
                 await page.locator('[data-mode="' + task['mode'] + '"]').click()
                 await page.locator('#analysis-input').fill(task['question'])
@@ -187,6 +189,8 @@ async def main():
                 report['tasks'].append({'id': task['id'], 'accepted': bool(accepted), 'sources_valid': sources_valid, 'wall_seconds': time.monotonic() - at, 'response': bundle})
                 print('HOSTED_TASK', task['id'], bool(accepted), flush=True)
             await page.screenshot(path=str(output / 'UI-fixed-analysis.png'), full_page=True)
+            assert await page.locator('[data-action="cancel-analysis"]').is_hidden(), 'COMPLETED_CANCEL_VISIBLE'
+            report['interface_checks'].append('analysis_control_states')
             report['task_successes'] = sum(row['accepted'] for row in report['tasks'])
             report['task_total'] = len(report['tasks'])
             report['page_errors'] = errors
