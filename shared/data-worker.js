@@ -8,7 +8,7 @@ async function detail(i){const key=String(Math.floor(i/metadata.shard_size)).pad
 function filter(f,query=''){const list=[];for(let i=0;i<catalog.length;i++){if(matches(catalog[i],f)&&(!query||texts[i].includes(query)))list.push(i);}return list;}
 async function retrieve(question,f){
  await ensureText();stopwords??=new Set(await (await fetch(new URL('./search_stopwords.json',import.meta.url))).json());
- const terms=[...new Set((question.toLowerCase().match(/[a-z]{3,}/g)||[]).filter(t=>!stopwords.has(t)&&!['review','reviews','example','examples','complaint','complaints','negative','positive','neutral','mixed','bank','banks','show','tell','find'].includes(t)).map(t=>t.slice(0,6)))].slice(0,12);
+ const terms=[...new Set((question.toLowerCase().match(/[a-z]{3,}/g)||[]).filter(t=>!stopwords.has(t)&&!['review','reviews','example','examples','complaint','complaints','negative','positive','neutral','mixed','bank','banks','show','tell','find','feedback','containing','contains','collection','selected','selection','record','records','customers','customer','say','says','report','reported','issues','issue','problems','problem','experiences','experience','banking'].includes(t)).map(t=>t.slice(0,6)))].slice(0,12);
  const candidates=[],df=Object.fromEntries(terms.map(t=>[t,0]));
  for(const i of filter(f)){const text=texts[i];const hit=terms.filter(t=>text.includes(t));if(hit.length){hit.forEach(t=>df[t]++);candidates.push({i,hit,length:text.length});}}
  candidates.forEach(c=>c.score=c.hit.reduce((n,t)=>n+Math.log(1+catalog.length/(1+df[t])),0)/(1+c.length/1500));candidates.sort((a,b)=>b.score-a.score||a.i-b.i);
