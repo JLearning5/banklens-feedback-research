@@ -21,9 +21,15 @@ async def main():
     session = requests.Session()
 
     def fetch(name):
-        response = session.get(base + name, timeout=120)
-        response.raise_for_status()
-        return response.content
+        for attempt in range(3):
+            try:
+                response = session.get(base + name, timeout=120)
+                response.raise_for_status()
+                return response.content
+            except (requests.ConnectionError, requests.Timeout):
+                if attempt == 2:
+                    raise
+                time.sleep(1 + attempt)
 
     metadata = json.loads(fetch('data/metadata.json'))
     raw = fetch('data/catalog.json.gz')
