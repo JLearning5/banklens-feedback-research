@@ -2,6 +2,18 @@ import {AutoTokenizer,AutoModelForCausalLM,AutoModelForSequenceClassification,Lo
 env.allowLocalModels=false;
 env.backends.onnx.wasm.numThreads=1;
 let tokenizer,model,busy=false,config,sentimentTokenizer,sentimentModel;
+async function ensureSentiment(){
+ if(!config?.sentiment)throw Error('SENTIMENT_MODEL_NOT_CONFIGURED');
+ if(sentimentModel)return;
+ const cfg=config.sentiment,progress_callback=p=>self.postMessage({event:'progress',file:p.file,status:p.status,progress:p.progress,loaded:p.loaded,total:p.total});
+ sentimentTokenizer=await AutoTokenizer.from_pretrained(cfg.id,{revision:cfg.revision,progress_callback});
+ sentimentModel=await AutoModelForSequenceClassification.from_pretrained(cfg.id,{revision:cfg.revision,dtype:'q8',device:'wasm',progress_callback});
+}
+async function sentimentResults(texts){
+ await ensureSentiment();
+ const inputs=sentimentTokenizer(texts,{truncation:true,padding:true,max_length:256}),output=await sentimentModel(inputs),width=output.logits.dims.at(-1);
+ return texts.map((text,row)=>{const values=Array.from(output.logits.data.slice(row*width,(row+1)*width)),maximum=Math.max(...values),exponentials=values.map(v=>Math.exp(v-maximum)),sum=exponentials.reduce((a,b)=>a+b,0),scores=Object.fromEntries(exponentials.map((v,i)=>[String(sentimentModel.config.id2label[i]).toLowerCase(),v/sum]));if(!['positive','negative','neutral'].every(k=>Object.hasOwn(scores,k)))throw Error('INVALID_SENTIMENT_LABELS');return {sentiment:Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0],scores,model:config.sentiment.id,revision:config.sentiment.revision};});
+}
 class ChoiceProcessor extends LogitsProcessor{constructor(ids){super();this.ids=ids;} _call(inputIds,scores){const width=scores.dims.at(-1);for(let row=0;row<inputIds.length;row++){const offset=row*width,values=this.ids.map(id=>scores.data[offset+id]);scores.data.fill(-Infinity,offset,offset+width);this.ids.forEach((id,i)=>scores.data[offset+id]=values[i]);}return scores;}}
 self.onmessage=async({data})=>{const {id,type,payload}=data;if(busy){self.postMessage({id,error:'MODEL_BUSY'});return;}busy=true;try{
  if(type==='load'){
@@ -11,8 +23,11 @@ self.onmessage=async({data})=>{const {id,type,payload}=data;if(busy){self.postMe
   if(navigator.gpu){try{const adapter=await navigator.gpu.requestAdapter();if(adapter?.features.has('shader-f16')){device='webgpu';dtype=config.gpu_dtype;}}catch{}}
   tokenizer=await AutoTokenizer.from_pretrained(config.id,{revision:config.revision,progress_callback});
   try{model=await AutoModelForCausalLM.from_pretrained(config.id,{revision:config.revision,dtype,device,progress_callback});}catch(error){if(device!=='webgpu')throw error;device='wasm';dtype=config.cpu_dtype;self.postMessage({event:'progress',status:'CPU preparation'});model=await AutoModelForCausalLM.from_pretrained(config.id,{revision:config.revision,dtype,device,progress_callback});}
-  const warm=tokenizer('Ready');await model.generate({...warm,max_new_tokens:1,do_sample:false});
+  const warm=tokenizer('Ready');await model.generate({...warm,max_new_tokens:1,do_sample:false});await ensureSentiment();
   self.postMessage({id,result:{model:config.id,revision:config.revision,device,dtype}});
+ }else if(type==='load_sentiment'){
+  config=payload;await ensureSentiment();
+  self.postMessage({id,result:{model:config.sentiment.id,revision:config.sentiment.revision,device:'wasm',dtype:'q8',mode:'standard'}});
  }else if(type==='choose'){
   if(!model||!tokenizer)throw Error('MODEL_NOT_READY');
   if(!Array.isArray(payload.choices)||payload.choices.length<2||payload.choices.length>16)throw Error('INVALID_CHOICES');
@@ -31,15 +46,10 @@ self.onmessage=async({data})=>{const {id,type,payload}=data;if(busy){self.postMe
   if(index<0)throw Error('INVALID_CHOICE_TOKEN');
   self.postMessage({id,result:codes[index].value});
  }else if(type==='sentiment'){
-  if(!config?.sentiment)throw Error('SENTIMENT_MODEL_NOT_CONFIGURED');
-  const cfg=config.sentiment;
-  if(!sentimentModel){const progress_callback=p=>self.postMessage({event:'progress',file:p.file,status:p.status,progress:p.progress});sentimentTokenizer=await AutoTokenizer.from_pretrained(cfg.id,{revision:cfg.revision,progress_callback});sentimentModel=await AutoModelForSequenceClassification.from_pretrained(cfg.id,{revision:cfg.revision,dtype:'q8',device:'wasm',progress_callback});}
-  const inputs=sentimentTokenizer(payload.text,{truncation:true,max_length:256});
-  const output=await sentimentModel(inputs),values=Array.from(output.logits.data),maximum=Math.max(...values),exponentials=values.map(v=>Math.exp(v-maximum)),sum=exponentials.reduce((a,b)=>a+b,0);
-  const scores=Object.fromEntries(exponentials.map((v,i)=>[String(sentimentModel.config.id2label[i]).toLowerCase(),v/sum]));
-  if(!['positive','negative','neutral'].every(k=>Object.hasOwn(scores,k)))throw Error('INVALID_SENTIMENT_LABELS');
-  const sentiment=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-  self.postMessage({id,result:{sentiment,scores,model:cfg.id,revision:cfg.revision}});
+  self.postMessage({id,result:(await sentimentResults([payload.text]))[0]});
+ }else if(type==='sentiment_batch'){
+  if(!Array.isArray(payload.texts)||!payload.texts.length||payload.texts.length>9||payload.texts.some(text=>typeof text!=='string'||text.length>1800))throw Error('INVALID_SENTIMENT_BATCH');
+  self.postMessage({id,result:await sentimentResults(payload.texts)});
  }else if(type==='generate'){
   if(!model||!tokenizer)throw Error('MODEL_NOT_READY');
   const inputs=tokenizer.apply_chat_template(payload.messages,{add_generation_prompt:true,return_dict:true,enable_thinking:false});

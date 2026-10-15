@@ -10,10 +10,10 @@ Open the deployed application and use the four workspaces:
 
 - **Overview:** filter banks, years, sentiment and service aspects; inspect totals and recurring issues.
 - **Feedback:** search the complete collection, open a source record and export the current selection.
-- **Analysis:** prepare a browser model, ask a question about the collection or analyse a new piece of feedback. Results include counts, linked feedback and the tool sequence.
+- **Analysis:** ask collection questions immediately, or analyse individual feedback with Standard or Enhanced detail. Results include counts, linked feedback and the tool sequence.
 - **Review:** open a queued record, record your judgement, save and continue. Export decisions to JSON or CSV and import them on another browser.
 
-The application loads its compact Qwen model when **Prepare analysis** is selected. Individual feedback analysis also loads a compact sentiment encoder. The model chooser shows the combined download size. Preparation progress appears in the workspace, and **Cancel** stops a running analysis.
+Collection questions use catalog tools and linked source excerpts immediately. Standard feedback analysis starts the compact sentiment encoder on demand and batches its text fragments; it uses the explicit aspect patterns and priority rules. Enhanced feedback analysis additionally loads the compact Qwen model for language-based choices. The workspace shows each first-use download size, keeps prepared resources for later requests, and supports cancellation.
 
 ## Project structure
 

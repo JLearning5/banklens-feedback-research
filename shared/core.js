@@ -7,6 +7,7 @@ export function routePolicy(question){
  const q=String(question).trim().toLowerCase();
  if(/^(?:please\s+)?(?:send|transfer|withdraw|deposit|pay)\b/.test(q)&&/\b(?:money|funds?|cash|payments?|account)\b/.test(q)&&! /\b(?:reviews?|feedback|examples?|customers?)\b/.test(q))return 'refer';
  if(/^(?:please\s+)?(?:change|reset|block|unblock|open|close)\b/.test(q)&&/\b(?:my|our)\b/.test(q)&&/\b(?:password|pin|account|card)\b/.test(q))return 'refer';
+ if(!/\b(?:reviews?|feedback|customers?|complaints?|examples?)\b/.test(q)&&/\b(?:account|card|password|pin)\b/.test(q)&&(/\b(?:i|we)\s+(?:need|want|would like)\s+(?:to\s+)?(?:get|open|create|set up|close|reset|block|unblock)\b/.test(q)||/\bhow\s+(?:can|do)\s+i\s+(?:get|open|create|close|reset|block|unblock)\b/.test(q)))return 'refer';
  if(/\bhow many\b|\b(?:count|total|number|percentage|percent|compare|comparison)\b/.test(q))return 'aggregate';
  if(/\b(?:show|find|examples?|retrieve)\b|\bwhat (?:do|are|have) (?:the )?customers\b|\b(?:feedback|reviews?)\s+(?:about|on|containing)\b/.test(q))return 'retrieve';
  return null;
