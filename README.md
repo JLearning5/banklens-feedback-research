@@ -11,9 +11,13 @@ Open the deployed application and use the four workspaces:
 - **Overview:** filter banks, years, sentiment and service aspects; inspect totals and recurring issues.
 - **Feedback:** search the complete collection, open a source record and export the current selection.
 - **Analysis:** ask collection questions immediately, or analyse individual feedback with Standard or Enhanced detail. Results include counts, linked feedback and the tool sequence.
-- **Review:** open a queued record, record your judgement, save and continue. Export decisions to JSON or CSV and import them on another browser.
+- **Review:** browse all 83,753 audited records, inspect findings, recommendations, candidate labels and source excerpts, then save a decision. Export decisions to JSON or CSV and import them on another browser.
 
 Collection questions use catalog tools and linked source excerpts immediately. Standard feedback analysis starts the compact sentiment encoder on demand and batches its text fragments; it uses the explicit aspect patterns and priority rules. Enhanced feedback analysis additionally loads the compact Qwen model for language-based choices. The workspace shows each first-use download size, keeps prepared resources for later requests, and supports cancellation.
+
+The second-pass audit takes precedence wherever it supplies a replacement label. Overview totals, filters, collection analysis, record details and feedback exports use those current labels. Each audited record retains its earlier and candidate labels for comparison. Personal review decisions remain separate.
+
+The review queue shows 25 records per page and supports jumping to a page. Small compressed summary files supply the visible rows; detailed findings and excerpts load only when opening a record. The full audit package and full-text search index are not required to open the queue. Data loading and aggregation run in a worker.
 
 ## Project structure
 
